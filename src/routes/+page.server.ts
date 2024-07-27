@@ -102,38 +102,39 @@ function getFirstAndLastDay(calendar: CalendarData): [Date, Date] {
 function getLecturesForDay(day: Date): Array<Lecture> {
   // Regular Lectures
   const lectures = calendar.subjects.flatMap(subject => {
-    return subject.lectures.map(lecture => {
-      return {
-        subject: {
-          id: subject.id,
-          name: subject.name
-        },
-        date: toDate(lecture.date),
-        room: lecture.room,
-        color: paths.find(path => path.id == subject.path)?.color || "gray",
-        isExam: false
-      }
-    })
+    return subject.lectures
+      .filter(lecture => toDate(lecture.date).toDateString() == day.toDateString())
+      .map(lecture => {
+        return {
+          subject: {
+            id: subject.id,
+            name: subject.name
+          },
+          room: lecture.room,
+          color: paths.find(path => path.id == subject.path)?.color || "gray",
+          isExam: false
+        }
+      })
   })
 
   // Exams
   const exams = calendar.subjects.flatMap(subject => {
-    return subject.exams.map(exam => {
-      return {
-        subject: {
-          id: subject.id,
-          name: subject.name
-        },
-        date: toDate(exam.date),
-        room: exam.room,
-        color: paths.find(path => path.id == subject.path)?.color || "gray",
-        isExam: true
-      }
-    })
+    return subject.exams
+      .filter(lecture => toDate(lecture.date).toDateString() == day.toDateString())
+      .map(exam => {
+        return {
+          subject: {
+            id: subject.id,
+            name: subject.name
+          },
+          room: exam.room,
+          color: paths.find(path => path.id == subject.path)?.color || "gray",
+          isExam: true
+        }
+      })
   })
 
   return lectures.concat(exams)
-    .filter(lecture => lecture.date.toDateString() == day.toDateString())
 }
 
 function getHolidayForDay(day: Date): string | undefined {

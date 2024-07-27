@@ -2,6 +2,11 @@ import type PathData from "../lib/interfaces/data/PathData"
 
 export const paths: PathData[] = [
     {
+        "id": "",
+        "color": "gray",
+        "name": ""
+    },
+    {
         "id": "GTI",
         "color": "blue",
         "name": "Gestión TI"

@@ -22,6 +22,8 @@ npm install
 ```
 
 ## Configuration
+### Updating the calendar
+You need to update the [data/calendar.ts](./src/data/calendar.ts) file and modify the calendar. It is done in a TypeScript file to ensure that the data types are correct.
 ### Change the year
 As this repo was created in 2023, the default course date is 2023/24. You can change that in the [routes/+page.svelte](./src/routes/+page.svelte) file.
 
